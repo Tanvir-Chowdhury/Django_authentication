@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(120deg, #3498db, #8e44ad);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .signup-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+        .signup-box {
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            text-align: center;
+        }
+        h2 {
+            margin: 0 0 20px;
+            padding: 0;
+            color: #333;
+        }
+        .textbox {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .textbox input {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #333;
+            outline: none;
+            color: #333;
+            font-size: 18px;
+        }
+        .textbox label {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            color: #333;
+            transform: translateY(-50%);
+            transition: .5s;
+            pointer-events: none;
+        }
+        .textbox input:focus ~ label,
+        .textbox input:valid ~ label {
+            top: -5px;
+            left: 10px;
+            color: #3498db;
+            font-size: 14px;
+        }
+        .btn {
+            width: 100%;
+            background: #3498db;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #fff;
+            transition: .3s;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background: #2980b9;
+        }
+        .login-link {
+            margin-top: 20px;
+            color: #333;
+        }
+        .login-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .message{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-box">
+            <h2>Sign Up</h2>
+            {% for m in messages %}
+                <p class="message">{{ m }}</p>
+            {% endfor %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="textbox">
+                    <input type="text" name="username" required>
+                    <label>Username</label>
+                </div>
+                <div class="textbox">
+                    <input type="email" name="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="textbox">
+                    <input type="password" name="password1" required>
+                    <label>Password</label>
+                </div>
+                <div class="textbox">
+                    <input type="password" name="password2" required>
+                    <label>Confirm Password</label>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+                <div class="login-link">
+                    Already have an account? <a href="{% url 'login' %}">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
